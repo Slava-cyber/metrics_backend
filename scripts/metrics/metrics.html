@@ -1,0 +1,28 @@
+<script>
+    const bodyElement = document.body;
+    bodyElement.addEventListener("click", function (event) {
+        const serverDomainUrl = 'http://127.0.0.1:8000';
+
+        let datetime = new Date();
+
+        let data = {
+            domain: window.location.hostname,
+            page_url: window.location.href,
+            position_x: event.clientX + window.scrollX,
+            position_y: event.clientY + window.scrollY,
+            screen_size_x: window.innerWidth,
+            screen_size_y: window.innerHeight,
+            datetime: datetime.toLocaleString(),
+            time_zone: datetime.getTimezoneOffset(),
+        };
+
+        fetch(serverDomainUrl +'/api/click', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+    });
+</script>

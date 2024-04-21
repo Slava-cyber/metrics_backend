@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\LogChannelsEnum;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -125,6 +126,11 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+        LogChannelsEnum::METRICS->value => [
+            'driver' => 'single',
+            'path' => storage_path('logs/metrics.log'),
+            'level' => 'debug',
         ],
     ],
 
